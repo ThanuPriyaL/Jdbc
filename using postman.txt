@@ -179,6 +179,12 @@ public class Controllers {
     public List<String> studentnames() {
         return demo.getAllStudentNames();
     }
+      @PostMapping(value = "/login")
+    public String Login(@RequestBody Login login){
+        System.out.println(login.getUsername());
+        return"login is done";
+    }
+}
    --------------------------------------------------------------------------------------------------------------------------------
   //Demo
   package com.example.Secondspring;
