@@ -180,7 +180,8 @@ public class Controllers {
         return demo.getAllStudentNames();
     }
    --------------------------------------------------------------------------------------------------------------------------------
-    package com.example.Secondspring;
+  //Demo
+  package com.example.Secondspring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
