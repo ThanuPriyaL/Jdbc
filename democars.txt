@@ -1,0 +1,177 @@
+//pom
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>demo2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo2</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+--------------------------------------------------------------------------------------------------------------------
+//Demo2Appli
+package com.example.demo2;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Demo2Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Demo2Application.class, args);
+	}
+
+}
+-----------------------------------------------------------------------------------------------
+//config
+package com.example.demo2;
+
+import org.springframework.context.annotation.Bean;
+
+
+import org.springframework.context.annotation.Configuration;
+@Configuration
+public class Config {
+
+    @Bean
+    public MyServices myservices(){
+        return new MyServices();
+    }
+}
+------------------------------------------------------------------------------------------------
+//myservices
+package com.example.demo2;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MyServices implements MyServicesInterface{
+
+    List<Car> list=new ArrayList<Car>();
+
+
+    public MyServices(){
+        list.add(new Car(1,"Swift"," wanna test drive??"));
+        list.add(new Car(2,"Tata","say tata to old one"));
+        list.add(new Car(2,"Toyoto","Family bubble"));
+    }
+
+    @Override
+    public List<Car> getCars() {  //get all books from the library
+        return list;
+    }
+
+    @Override
+    public Car addCar(Car cars) {
+        this.list.add(cars);
+        return cars;
+    }
+
+    @Override
+    public Car getById(int id) {
+
+        for(Car cars:this.list){
+            if(cars.getId()==id){
+                return cars;
+            }
+        }
+        return null;
+
+    }
+}
+----------------------------------------------------------------------------------------
+//myservices interface
+package com.example.demo2;
+
+import com.example.demo2.Car;
+
+import java.util.List;
+
+public interface MyServicesInterface {
+    public List<Car> getCars();
+    public Car addCar(Car books);
+    public Car getById(int id);
+}
+----------------------------------------------------------------------------------------
+//car
+package com.example.demo2;
+
+public class Car {
+    int id;
+    String name;
+    String dis;
+    public int getId() {
+        return id;
+    }
+
+    public Car(int id, String name, String dis) {
+        this.id = id;
+        this.name = name;
+        this.dis = dis;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDis() {
+        return dis;
+    }
+
+    public void setDis(String dis) {
+        this.dis = dis;
+    }
+
+
+
+}
+-------------------------------------------------------------------
+//appi properties
+
